@@ -90,7 +90,7 @@ const LoginPage = () => {
           className={`w-full py-2 rounded-lg mt-4 ${
             buttonDisabled || loading
               ? "bg-gray-300  cursor-not-allowed"
-              : "bg-purple-500 text-white hover:bg-purple-600"
+              : "bg-purple-500 text-black hover:bg-purple-600"
           }`}
         >
           {loading ? "Processing..." : "Login"}

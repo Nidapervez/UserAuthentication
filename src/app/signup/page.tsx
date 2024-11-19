@@ -104,7 +104,7 @@ const SignupPage = () => {
             disabled={!isFormValid || loading}
             className={`w-full py-2 rounded-lg mt-4 ${
               isFormValid
-                ? "bg-blue-500 text-white hover:bg-blue-600"
+                ? "bg-blue-500 text-black hover:bg-blue-600"
                 : "bg-gray-300 text-black cursor-not-allowed"
             }`}
           >
