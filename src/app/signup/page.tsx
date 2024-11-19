@@ -120,7 +120,7 @@ const SignupPage = () => {
             </p>
             <button
               onClick={() => router.push("/login")}
-              className="w-full py-2 rounded-lg mt-4 bg-green-500 text-white hover:bg-green-600"
+              className="w-full py-2 rounded-lg mt-4 bg-green-500 text-black hover:bg-green-600"
             >
               Go to Login Page
             </button>

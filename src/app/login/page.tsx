@@ -100,7 +100,7 @@ const LoginPage = () => {
         {loginFailed && (
           <button
             onClick={() => router.push("/signup")}
-            className="w-full py-2 rounded-lg mt-4 bg-red-500 text-white hover:bg-red-600"
+            className="w-full py-2 rounded-lg mt-4 bg-red-500 text-black hover:bg-red-600"
           >
             Wrong information!! Go to Signup Page to Signup
           </button>
