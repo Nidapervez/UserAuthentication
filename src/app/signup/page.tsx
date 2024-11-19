@@ -1,13 +1,20 @@
 "use client";
 import React, { useState } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";  // Import AxiosError for type safety
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import Link from "next/link";  // Import Link from next/link
 
+// Define a type for the user state
+interface User {
+  email: string;
+  password: string;
+  username: string;
+}
+
 const SignupPage = () => {
   const router = useRouter();
-  const [user, setUser] = useState({
+  const [user, setUser] = useState<User>({
     email: "",
     password: "",
     username: "",
@@ -23,11 +30,16 @@ const SignupPage = () => {
 
       toast.success("Registration successful! Click the button below to log in.");
       setSignupComplete(true); // Mark signup as complete
-    } catch (error: any) {
-      console.error("Signup failed:", error);
-      toast.error(
-        error.response?.data?.message || "Signup failed. Please try again."
-      );
+    } catch (error: unknown) {
+      // Type the error as AxiosError to handle it correctly
+      if (error instanceof AxiosError) {
+        console.error("Signup failed:", error);
+        toast.error(
+          error.response?.data?.message || "Signup failed. Please try again."
+        );
+      } else {
+        toast.error("An unexpected error occurred. Please try again.");
+      }
     } finally {
       setLoading(false);
     }
@@ -43,7 +55,7 @@ const SignupPage = () => {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white shadow-md rounded-lg p-8 w-80">
         <h1 className="text-2xl font-bold text-center mb-6">
-          {loading ? "Processing..." : "Sign Up"}
+          {loading ? "Processing..." : signupComplete ? "Sign Up Complete" : "Sign Up"}
         </h1>
 
         {/* Username Field */}
@@ -96,23 +108,11 @@ const SignupPage = () => {
                 : "bg-gray-300 text-gray-700 cursor-not-allowed"
             }`}
           >
-            {loading
-              ? "Registering your account... Click login to check"
-              : "Sign Up"}
+            {loading ? "Registering your account... Please wait" : "Sign Up"}
           </button>
         )}
 
-        {/* Login Button */}
-        {isFormValid && !signupComplete && (
-          <button
-            onClick={() => router.push("/login")}
-            className="w-full py-2 rounded-lg mt-4 bg-green-500 text-white hover:bg-green-600"
-          >
-            Login
-          </button>
-        )}
-
-        {/* Success Message */}
+        {/* Success Message and Login Button */}
         {signupComplete && (
           <>
             <p className="mt-4 text-center text-green-600">
@@ -128,14 +128,16 @@ const SignupPage = () => {
         )}
 
         {/* Link to Login Page */}
-        <div className="mt-4 text-center text-sm text-gray-600">
-          <p>
-            Already have an account?{" "}
-            <Link href="/login" className="text-blue-500 hover:underline">
-              Login here
-            </Link>
-          </p>
-        </div>
+        {!signupComplete && (
+          <div className="mt-4 text-center text-sm text-gray-600">
+            <p>
+              Already have an account?{" "}
+              <Link href="/login" className="text-blue-500 hover:underline">
+                Login here
+              </Link>
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

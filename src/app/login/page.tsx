@@ -1,13 +1,19 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";  // Import AxiosError for type safety
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
+// Define a type for the user state
+interface User {
+  email: string;
+  password: string;
+}
+
 const LoginPage = () => {
   const router = useRouter();
-  const [user, setUser] = useState({
+  const [user, setUser] = useState<User>({
     email: "",
     password: "",
   });
@@ -22,9 +28,14 @@ const LoginPage = () => {
       console.log("Login Success", response.data);
       router.push("/profile");
       setLoginFailed(false); // Reset login failure state on success
-    } catch (error: any) {
-      console.log("Login failed");
-      toast.error(error.message);
+    } catch (error: unknown) {
+      // Type the error as AxiosError to handle it correctly
+      if (error instanceof AxiosError) {
+        console.log("Login failed", error);
+        toast.error(error.response?.data?.message || "Login failed. Please try again.");
+      } else {
+        toast.error("An unexpected error occurred. Please try again.");
+      }
       setLoginFailed(true); // Set login failure state on error
     } finally {
       setLoading(false);
