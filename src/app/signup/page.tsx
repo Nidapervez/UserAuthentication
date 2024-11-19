@@ -59,7 +59,7 @@ const SignupPage = () => {
         </h1>
 
         {/* Username Field */}
-        <label htmlFor="username" className="block text-gray-700">
+        <label htmlFor="username" className="block text-black">
           Username
         </label>
         <input
@@ -72,7 +72,7 @@ const SignupPage = () => {
         />
 
         {/* Email Field */}
-        <label htmlFor="email" className="block text-gray-700">
+        <label htmlFor="email" className="block text-black">
           Email
         </label>
         <input
@@ -85,7 +85,7 @@ const SignupPage = () => {
         />
 
         {/* Password Field */}
-        <label htmlFor="password" className="block text-gray-700">
+        <label htmlFor="password" className="block text-black">
           Password
         </label>
         <input
@@ -105,7 +105,7 @@ const SignupPage = () => {
             className={`w-full py-2 rounded-lg mt-4 ${
               isFormValid
                 ? "bg-blue-500 text-white hover:bg-blue-600"
-                : "bg-gray-300 text-gray-700 cursor-not-allowed"
+                : "bg-gray-300 text-black cursor-not-allowed"
             }`}
           >
             {loading ? "Registering your account... Please wait" : "Sign Up"}
@@ -129,7 +129,7 @@ const SignupPage = () => {
 
         {/* Link to Login Page */}
         {!signupComplete && (
-          <div className="mt-4 text-center text-sm text-gray-600">
+          <div className="mt-4 text-center text-sm text-black">
             <p>
               Already have an account?{" "}
               <Link href="/login" className="text-blue-500 hover:underline">

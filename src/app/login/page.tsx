@@ -58,7 +58,7 @@ const LoginPage = () => {
         </h1>
 
         {/* Email Field */}
-        <label htmlFor="email" className="block text-gray-700">
+        <label htmlFor="email" className="block">
           Email
         </label>
         <input
@@ -71,7 +71,7 @@ const LoginPage = () => {
         />
 
         {/* Password Field */}
-        <label htmlFor="password" className="block text-gray-700">
+        <label htmlFor="password" className="block">
           Password
         </label>
         <input
@@ -89,7 +89,7 @@ const LoginPage = () => {
           disabled={buttonDisabled || loading}
           className={`w-full py-2 rounded-lg mt-4 ${
             buttonDisabled || loading
-              ? "bg-gray-300 text-gray-700 cursor-not-allowed"
+              ? "bg-gray-300  cursor-not-allowed"
               : "bg-purple-500 text-white hover:bg-purple-600"
           }`}
         >
